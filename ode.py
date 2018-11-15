@@ -13,7 +13,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+"""This module explores the different techniques of solving a differential equation with the initial condition v(0) = 0 and x(0) = 1 and x'(t) = v(t), v'(t) = -x'(t)
+Techniques include Euler's method, Huen's method and both the 2nd and 4th order Runge-Kutta Methods
+"""
 def euler():
+    """ Plots the solution to the differential equation with the given initial conditions to verify they equal sin(x) and cos(x) using Euler's Method
+    """
     t = np.linspace(0.0, 5*2*np.pi, 1000, dtype = float)
     
 
@@ -42,6 +47,8 @@ def euler():
 
 
 def huen():
+    """ Plots the solution to the differential equation with the given initial conditions to verify they equal sin(x) and cos(x) using Huen's Method
+    """
     t = np.linspace(0, 5*2*np.pi, 1000, dtype = float)
     
     x = np.zeros_like(t)
@@ -55,8 +62,8 @@ def huen():
     for i in range(s-1):
         ui = x[i] + (t[i+1]-t[i])*v[i]
         vi = v[i] + (t[i+1]-t[i])*-x[i]
-        x[i+1] = x[i] + (t[i+1]/2 - t[i]/2)*(v[i]+ui)
-        v[i+1] = v[i] + (t[i+1]/2 - t[i]/2)*(-x[i]+vi)
+        x[i+1] = x[i] + (t[i+1]/2 - t[i]/2)*(v[i]+vi)
+        v[i+1] = v[i] + (t[i+1]/2 - t[i]/2)*(-x[i]-ui)
         r[0,i] = x[i]
         r[1,i] = v[i]
 
@@ -66,11 +73,13 @@ def huen():
     cartesian.plot(t, r[0], 'b', label = "$u(t)$")
     cartesian.plot(t, r[1], 'r', label = "$v(t)$")
     
-    cartesian.set(ylim = (-5,5))
+    cartesian.set(ylim = (-2,2))
     cartesian.legend()
     plt.show()
     
 def rk2():
+    """ Plots the solution to the differential equation with the given initial conditions to verify they equal sin(x) and cos(x) using Runge-Kutta's 2nd Order Method
+    """
     t = np.linspace(0, 5*2*np.pi, 1000, dtype = float)
     x = np.zeros_like(t)
     v = np.zeros_like(t)
@@ -101,6 +110,8 @@ def rk2():
 
         
 def rk4():
+    """ Plots the solution to the differential equation with the given initial conditions to verify they equal sin(x) and cos(x) using Runge-Kutta's 4th Order Method
+    """
     t = np.linspace(0, 5*2*np.pi, 1000, dtype = float)
     x = np.zeros_like(t)
     v = np.zeros_like(t)
